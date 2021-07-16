@@ -1,0 +1,59 @@
+# SE 126
+# Lab 3A
+# Variables used:
+#  computer_type    Type of computer.  Desktop or Laptop
+#  num_hdd          Number of hard disk dirves.  This is field 5 row[5]
+#  year             Year purchased
+#  lab3b.txt        Represents the csv file
+#  num_desktops     Number of desktop computers
+#  num_laptops      Number of labtop computers
+#  row              Represents a row in the file
+#  current_year     Today's year
+
+import csv, datetime
+
+num_desktops = 0
+num_laptops = 0
+current_year = int(datetime.datetime.now().year)
+
+with open ("C:\SE 126\Lab3a.csv") as csvfile:
+    lab3b = csv.reader(csvfile)
+    
+    for row in lab3b:
+        num_hdd = row[5]    # Field (row) 5 contains the number of hard drives (1 or 2)
+        if(row[0] == "D"):
+            computer_type = "Desktop"
+            if(num_hdd == "1"):
+                year = int(row[7])   # Field (row) 7 contains the year the computer was purchased
+                year = 2000 + year
+                year = int(year)
+                if(current_year - year > 2):
+                    num_desktops = num_desktops + 1
+            else:
+                year = int(row[8])   # Field (row) 8 contains the year the computer was purchased
+                year = 2000 + year
+                year = int(year)
+                if(current_year - year > 2):
+                    num_desktops = num_desktops + 1
+        else:
+            computer_type = "Laptop"
+            if(num_hdd == "1"):
+                year = int(row[7])   # Field (row) 7 contains the year the computer was purchased
+                year = 2000 + year
+                if(current_year - year > 2):
+                    num_laptops = num_laptops + 1
+            else:
+                year = int(row[8])   # Field (row) 8 contains the year the computer was purchased
+                year = 2000 + year
+                if(current_year - year > 2):
+                    num_laptops = num_laptops + 1
+
+desktop_price = num_desktops * 2000
+laptop_price =  num_laptops * 1500
+
+print("To replace ", num_desktops, " it will cost $", desktop_price)
+print("To replace ", num_laptops, " it will cost $ ",laptop_price)
+print()
+print()
+
+
